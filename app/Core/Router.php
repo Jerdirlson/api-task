@@ -4,7 +4,7 @@ namespace app\Core;
 
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
-use app\Core\AuthMiddleware;
+use app\Core\RoleMiddleware;
 use app\Controller\AuthController;
 use app\Controller\UserController;
 
@@ -29,7 +29,7 @@ class Router
     private static function defineUserRoutes(App $app)
     {
         $app->post('/register', [UserController::class, 'register']);
-        $app->get('/user', [UserController::class, 'getUser'])->add(new AuthMiddleware());
+        $app->get('/user', [UserController::class, 'getUser'])->add(new RoleMiddleware(1));;
     }
     private static function defineCharacterRoutes(App $app)
     {
@@ -39,7 +39,7 @@ class Router
             $group->get('/{id}', 'app\Controller\CharacterController:show');
             $group->put('/{id}', 'app\Controller\CharacterController:update');
             $group->delete('/{id}', 'app\Controller\CharacterController:destroy');
-        })->add(new AuthMiddleware());
+        })->add(new RoleMiddleware(1));
     }
 
     private static function defineEquipmentRoutes(App $app)
@@ -50,7 +50,7 @@ class Router
             $group->get('/{id}', 'app\Controller\EquipmentController:show');
             $group->put('/{id}', 'app\Controller\EquipmentController:update');
             $group->delete('/{id}', 'app\Controller\EquipmentController:destroy');
-        })->add(new AuthMiddleware());
+        })->add(new RoleMiddleware(2));;
     }
 
     private static function defineFactionRoutes(App $app)
@@ -61,6 +61,6 @@ class Router
             $group->get('/{id}', 'app\Controller\FactionController:show');
             $group->put('/{id}', 'app\Controller\FactionController:update');
             $group->delete('/{id}', 'app\Controller\FactionController:destroy');
-        })->add(new AuthMiddleware());
+        })->add(new RoleMiddleware(3));
     }
 }

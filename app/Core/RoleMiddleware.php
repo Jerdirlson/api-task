@@ -1,4 +1,5 @@
 <?php
+
 namespace app\Core;
 
 use Firebase\JWT\JWT;
@@ -8,13 +9,20 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Psr7\Response as SlimResponse;
 
-class AuthMiddleware
+class RoleMiddleware
 {
+    private $requiredRole;
+
+    public function __construct(int $requiredRole)
+    {
+        $this->requiredRole = $requiredRole;
+    }
+
     public function __invoke(Request $request, RequestHandler $handler): Response
     {
         $authHeader = $request->getHeader('Authorization');
         if (!$authHeader) {
-            return $this->unauthorizedResponse();
+            return $this->unauthorizedResponse('Authorization header not found');
         }
 
         $authHeader = $authHeader[0];
@@ -22,6 +30,13 @@ class AuthMiddleware
 
         try {
             $decoded = JWT::decode($token, new Key('your-secret-key', 'HS256'));
+
+            $roles = $decoded->role;
+
+            if ($this->requiredRole !== $roles) {
+                return $this->unauthorizedResponse('Insufficient permissions');
+            }
+
             $request = $request->withAttribute('user', $decoded);
         } catch (\Exception $e) {
             return $this->unauthorizedResponse('Invalid token');

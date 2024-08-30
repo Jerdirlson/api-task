@@ -33,6 +33,7 @@ class AuthController
                 'iat' => $issuedAt,
                 'exp' => $expirationTime,
                 'username' => $username,
+                'role' => $user['role_id'],
             ];
 
             $token = JWT::encode($payload, 'your-secret-key', 'HS256');
