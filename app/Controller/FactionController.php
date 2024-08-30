@@ -1,10 +1,10 @@
 <?php
 namespace app\Controller;
 
-use app\Repositories\FactionRepositoryInterface;
+use app\Model\Interfaces\FactionRepositoryInterface;
+use app\Utils\ErrorHandler;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
-use app\Utils\ErrorHandler;
 
 class FactionController
 {

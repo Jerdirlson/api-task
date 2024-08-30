@@ -1,8 +1,9 @@
 <?php
 
-namespace app\Repositories;
+namespace app\Model\Repositories;
 
 use app\Core\Database;
+use app\Model\Interfaces\CharacterRepositoryInterface;
 use app\Utils\ErrorHandler;
 use PDOException;
 

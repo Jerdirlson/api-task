@@ -1,11 +1,11 @@
 <?php
 
-namespace app\Repositories;
+namespace app\Model\Repositories;
 
 use app\Core\Database;
-use PDO;
-use PDOException;
+use app\Model\Interfaces\FactionRepositoryInterface;
 use app\Utils\ErrorHandler;
+use PDOException;
 
 class FactionRepository implements FactionRepositoryInterface
 {

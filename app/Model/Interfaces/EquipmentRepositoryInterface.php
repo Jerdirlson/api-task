@@ -1,8 +1,8 @@
 <?php
 
-namespace app\Repositories;
+namespace app\Model\Interfaces;
 
-interface FactionRepositoryInterface
+interface EquipmentRepositoryInterface
 {
     public function getAll(): array;
     public function getById(int $id): ?array;

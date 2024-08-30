@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/fig/http-message-util" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/firebase/php-jwt" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/graham-campbell/result-type" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/serializable-closure" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/nikic/fast-route" />

@@ -4,7 +4,7 @@ services:
   php:
     image: graphicresources/itpg-api-coding-task:development
     working_dir: /var/www
-    command: php -S 0.0.0.0:8080 -t public
+    command: php -S 0.0.0.0:8080 -t Public
     environment:
       docker: "true"
     ports:

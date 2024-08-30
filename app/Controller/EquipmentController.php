@@ -1,10 +1,10 @@
 <?php
 namespace app\Controller;
 
-use app\Repositories\EquipmentRepositoryInterface;
+use app\Model\Interfaces\EquipmentRepositoryInterface;
+use app\Utils\ErrorHandler;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
-use app\Utils\ErrorHandler;
 
 class EquipmentController
 {

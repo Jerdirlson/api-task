@@ -2,10 +2,10 @@
 
 namespace app\Controller;
 
-use app\Repositories\CharacterRepositoryInterface;
+use app\Model\Interfaces\CharacterRepositoryInterface;
+use app\Utils\ErrorHandler;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
-use app\Utils\ErrorHandler;
 
 class CharacterController
 {

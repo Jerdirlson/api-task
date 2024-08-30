@@ -1,15 +1,15 @@
 <?php
 
-use DI\Container;
-use Slim\Factory\AppFactory;
-use app\Repositories\CharacterRepository;
-use app\Repositories\CharacterRepositoryInterface;
-use app\Repositories\EquipmentRepository;
-use app\Repositories\EquipmentRepositoryInterface;
-use app\Repositories\FactionRepository;
-use app\Repositories\FactionRepositoryInterface;
 use app\Core\Router;
+use app\Model\Interfaces\CharacterRepositoryInterface;
+use app\Model\Interfaces\EquipmentRepositoryInterface;
+use app\Model\Interfaces\FactionRepositoryInterface;
+use app\Model\Repositories\CharacterRepository;
+use app\Model\Repositories\EquipmentRepository;
+use app\Model\Repositories\FactionRepository;
+use DI\Container;
 use Dotenv\Dotenv;
+use Slim\Factory\AppFactory;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 

@@ -34,6 +34,7 @@
       <path value="$PROJECT_DIR$/app/vendor/php-di/php-di" />
       <path value="$PROJECT_DIR$/app/vendor/php-di/invoker" />
       <path value="$PROJECT_DIR$/app/vendor/php-di/slim-bridge" />
+      <path value="$PROJECT_DIR$/app/vendor/firebase/php-jwt" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
