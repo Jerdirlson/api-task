@@ -6,12 +6,14 @@ use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use app\Core\AuthMiddleware;
 use app\Controller\AuthController;
+use app\Controller\UserController;
 
 class Router
 {
     public static function init(App $app): App
     {
         self::defineAuthRoutes($app);
+        self::defineUserRoutes($app);
         self::defineCharacterRoutes($app);
         self::defineEquipmentRoutes($app);
         self::defineFactionRoutes($app);
@@ -22,6 +24,12 @@ class Router
     private static function defineAuthRoutes(App $app)
     {
         $app->post('/login', [AuthController::class, 'login']);
+    }
+
+    private static function defineUserRoutes(App $app)
+    {
+        $app->post('/register', [UserController::class, 'register']);
+        $app->get('/user', [UserController::class, 'getUser'])->add(new AuthMiddleware());
     }
     private static function defineCharacterRoutes(App $app)
     {
