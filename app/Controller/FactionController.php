@@ -15,6 +15,25 @@ class FactionController
         $this->repository = $repository;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/factions",
+     *     summary="Obtiene una lista de todas las facciones",
+     *     description="Retorna una lista con todas las facciones disponibles en la base de datos.",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de facciones obtenida exitosamente",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Faction")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error al obtener las facciones"
+     *     )
+     * )
+     */
     public function index(Request $request, Response $response): Response
     {
         try {
@@ -28,6 +47,33 @@ class FactionController
         }
     }
 
+    /**
+     * @OA\Get(
+     *     path="/factions/{id}",
+     *     summary="Obtiene una facción por ID",
+     *     description="Retorna los datos de una facción específica basada en su ID.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID de la facción",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Facción encontrada",
+     *         @OA\JsonContent(ref="#/components/schemas/Faction")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Facción no encontrada"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error al obtener la facción"
+     *     )
+     * )
+     */
     public function show(Request $request, Response $response, array $args): Response
     {
         try {
@@ -44,6 +90,29 @@ class FactionController
         }
     }
 
+    /**
+     * @OA\Post(
+     *     path="/factions",
+     *     summary="Crea una nueva facción",
+     *     description="Permite crear una nueva facción en la base de datos.",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/Faction")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Facción creada exitosamente",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Faction created successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error al crear la facción"
+     *     )
+     * )
+     */
     public function store(Request $request, Response $response): Response
     {
         $data = $request->getParsedBody();
@@ -60,6 +129,36 @@ class FactionController
         }
     }
 
+    /**
+     * @OA\Put(
+     *     path="/factions/{id}",
+     *     summary="Actualiza una facción existente",
+     *     description="Permite actualizar los datos de una facción existente.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID de la facción",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/Faction")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Facción actualizada exitosamente",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Faction updated successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error al actualizar la facción"
+     *     )
+     * )
+     */
     public function update(Request $request, Response $response, array $args): Response
     {
         $data = $request->getParsedBody();
@@ -76,6 +175,32 @@ class FactionController
         }
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/factions/{id}",
+     *     summary="Elimina una facción por ID",
+     *     description="Permite eliminar una facción de la base de datos usando su ID.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID de la facción",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Facción eliminada exitosamente",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Faction deleted successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error al eliminar la facción"
+     *     )
+     * )
+     */
     public function destroy(Request $request, Response $response, array $args): Response
     {
         try {

@@ -11,6 +11,9 @@ services:
       - "8080:8080"
     volumes:
       - ./app:/var/www
+    depends_on:
+      - db
+      - redis
     networks:
       - bridge
 
@@ -28,6 +31,14 @@ services:
       interval: 3s
       timeout: 1s
       retries: 5
+    networks:
+      - bridge
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
     networks:
       - bridge
 

@@ -100,7 +100,7 @@ INSERT INTO role_permissions (role_id, permission_id) VALUES
 
 -- Crear un usuario de prueba
 INSERT INTO `user` (username, password) VALUES
-    ('admin_user', '$2y$10$E0NRZ9JQLTjGzZhK.WQ2BO.9JlTgONByYRhft/HmB66TTDZCjwlqy'); -- password: 'admin123'
+    ('admin_user', '$2y$10$urjQC03YHP2K2P5yJhWH0eTOshuHLp3f4MUqXLZbb5vg7hFyo.EVe'); -- password: '2024'
 
 -- Asignar roles al usuario de prueba
 INSERT INTO user_roles (user_id, role_id) VALUES

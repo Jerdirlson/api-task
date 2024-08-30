@@ -28,6 +28,11 @@
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/polyfill-mbstring" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/polyfill-php80" />
       <excludeFolder url="file://$MODULE_DIR$/app/vendor/vlucas/phpdotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/predis/predis" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/finder" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/yaml" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/zircote/swagger-php" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

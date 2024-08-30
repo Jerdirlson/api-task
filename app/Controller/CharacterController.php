@@ -1,5 +1,4 @@
 <?php
-
 namespace app\Controller;
 
 use app\Model\Interfaces\CharacterRepositoryInterface;
@@ -16,6 +15,25 @@ class CharacterController
         $this->repository = $repository;
     }
 
+    /**
+     * @OA\Get(
+     *     path="/characters",
+     *     summary="Obtiene una lista de todos los personajes",
+     *     description="Retorna una lista con todos los personajes disponibles en la base de datos.",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de personajes obtenida exitosamente",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Character")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error al obtener los personajes"
+     *     )
+     * )
+     */
     public function index(Request $request, Response $response): Response
     {
         try {
@@ -30,6 +48,33 @@ class CharacterController
         }
     }
 
+    /**
+     * @OA\Get(
+     *     path="/characters/{id}",
+     *     summary="Obtiene un personaje por ID",
+     *     description="Retorna los datos de un personaje específico basado en su ID.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID del personaje",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Personaje encontrado",
+     *         @OA\JsonContent(ref="#/components/schemas/Character")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Personaje no encontrado"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error al obtener el personaje"
+     *     )
+     * )
+     */
     public function show(Request $request, Response $response, array $args): Response
     {
         try {
@@ -47,6 +92,29 @@ class CharacterController
         }
     }
 
+    /**
+     * @OA\Post(
+     *     path="/characters",
+     *     summary="Crea un nuevo personaje",
+     *     description="Permite crear un nuevo personaje en la base de datos.",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/Character")
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Personaje creado exitosamente",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Character created successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error al crear el personaje"
+     *     )
+     * )
+     */
     public function store(Request $request, Response $response): Response
     {
         $data = $request->getParsedBody();
@@ -64,6 +132,36 @@ class CharacterController
         }
     }
 
+    /**
+     * @OA\Put(
+     *     path="/characters/{id}",
+     *     summary="Actualiza un personaje existente",
+     *     description="Permite actualizar los datos de un personaje existente.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID del personaje",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(ref="#/components/schemas/Character")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Personaje actualizado exitosamente",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Character updated successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error al actualizar el personaje"
+     *     )
+     * )
+     */
     public function update(Request $request, Response $response, array $args): Response
     {
         $data = $request->getParsedBody();
@@ -81,6 +179,32 @@ class CharacterController
         }
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/characters/{id}",
+     *     summary="Elimina un personaje por ID",
+     *     description="Permite eliminar un personaje de la base de datos usando su ID.",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID del personaje",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Personaje eliminado exitosamente",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Character deleted successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Error al eliminar el personaje"
+     *     )
+     * )
+     */
     public function destroy(Request $request, Response $response, array $args): Response
     {
         try {

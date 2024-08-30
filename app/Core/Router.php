@@ -2,6 +2,7 @@
 
 namespace app\Core;
 
+use Predis\Client;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 use app\Core\RoleMiddleware;

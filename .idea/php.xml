@@ -35,6 +35,11 @@
       <path value="$PROJECT_DIR$/app/vendor/php-di/invoker" />
       <path value="$PROJECT_DIR$/app/vendor/php-di/slim-bridge" />
       <path value="$PROJECT_DIR$/app/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/app/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/app/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/app/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/app/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/app/vendor/zircote/swagger-php" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

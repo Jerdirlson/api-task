@@ -17,7 +17,9 @@
     "vlucas/phpdotenv": "^5.6",
     "php-di/php-di": "^7.0",
     "php-di/slim-bridge": "^3.4",
-    "firebase/php-jwt": "^6.10"
+    "firebase/php-jwt": "^6.10",
+    "predis/predis": "^2.2",
+    "zircote/swagger-php": "^4.10"
   },
   "autoload": {
     "psr-4": {
