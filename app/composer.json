@@ -1,0 +1,29 @@
+{
+  "name": "freepikcompany/api-coding-task",
+  "description": "An API Backend coding task",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Freepik Company Backend Guild",
+      "email": "dev@freepik.com"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "ext-json": "*",
+    "ext-pdo": "*",
+    "slim/slim": "^4.14",
+    "slim/psr7": "^1.7",
+    "vlucas/phpdotenv": "^5.6",
+    "php-di/php-di": "^7.0",
+    "php-di/slim-bridge": "^3.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "./"
+    }
+  },
+  "config": {
+    "allow-plugins": true
+  }
+}

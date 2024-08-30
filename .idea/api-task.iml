@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/app/." isTestSource="false" packagePrefix="app\" />
+      <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/fig/http-message-util" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/graham-campbell/result-type" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/laravel/serializable-closure" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/nikic/fast-route" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/php-di/invoker" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/php-di/php-di" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/php-di/slim-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/phpoption/phpoption" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/psr/http-factory" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/psr/http-message" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/psr/http-server-handler" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/psr/http-server-middleware" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/ralouphie/getallheaders" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/slim/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/slim/slim" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/vlucas/phpdotenv" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
