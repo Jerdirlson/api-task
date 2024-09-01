@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": "^8.0",
+    "php": "^8.1",
     "ext-json": "*",
     "ext-pdo": "*",
     "slim/slim": "^4.14",
@@ -19,7 +19,8 @@
     "php-di/slim-bridge": "^3.4",
     "firebase/php-jwt": "^6.10",
     "predis/predis": "^2.2",
-    "zircote/swagger-php": "^4.10"
+    "zircote/swagger-php": "^4.10",
+    "swagger-api/swagger-ui": "^5.17"
   },
   "autoload": {
     "psr-4": {

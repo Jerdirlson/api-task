@@ -5,6 +5,7 @@ use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 use app\Model\Repositories\UserRepository;
 use app\Utils\ResponseHelper;
+use OpenApi\Attributes as OA;
 
 class UserController
 {
@@ -15,46 +16,54 @@ class UserController
         $this->userRepository = new UserRepository();
     }
 
-    /**
-     * @OA\Post(
-     *     path="/register",
-     *     summary="Registra un nuevo usuario",
-     *     description="Permite registrar un nuevo usuario en el sistema.",
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(
-     *             required={"username", "password"},
-     *             @OA\Property(property="username", type="string", example="newuser"),
-     *             @OA\Property(property="password", type="string", example="securepassword"),
-     *             @OA\Property(property="role", type="integer", example=3, description="ID del rol (opcional, por defecto 3)")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="Usuario registrado exitosamente",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="User registered successfully")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=409,
-     *         description="Nombre de usuario ya existe",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="error", type="string", example="Username already exists")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error al registrar el usuario",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="error", type="string", example="Failed to register user")
-     *         )
-     *     )
-     * )
-     */
+    #[OA\Post(
+        path: "/register",
+        description: "Allows a new user to register in the system.",
+        summary: "Register a new user",
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                required: ["username", "password"],
+                properties: [
+                    new OA\Property(property: "username", type: "string", example: "newuser"),
+                    new OA\Property(property: "password", type: "string", example: "securepassword"),
+                    new OA\Property(property: "role", type: "integer", example: 3, description: "Role ID (optional, default 3)")
+                ]
+            )
+        ),
+        responses: [
+            new OA\Response(
+                response: 201,
+                description: "User registered successfully",
+                content: new OA\JsonContent(
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "User registered successfully")
+                    ]
+                )
+            ),
+            new OA\Response(
+                response: 409,
+                description: "Username already exists",
+                content: new OA\JsonContent(
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "error", type: "string", example: "Username already exists")
+                    ]
+                )
+            ),
+            new OA\Response(
+                response: 500,
+                description: "Failed to register user",
+                content: new OA\JsonContent(
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "error", type: "string", example: "Failed to register user")
+                    ]
+                )
+            )
+        ]
+    )]
     public function register(Request $request, Response $response): Response
     {
         $body = $request->getBody()->getContents();
@@ -74,31 +83,35 @@ class UserController
         return ResponseHelper::error($response, 'Failed to register user', 500);
     }
 
-    /**
-     * @OA\Get(
-     *     path="/user",
-     *     summary="Obtiene los datos del usuario autenticado",
-     *     description="Retorna la información del usuario autenticado actualmente.",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Datos del usuario obtenidos exitosamente",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="id", type="integer", example=1),
-     *             @OA\Property(property="username", type="string", example="currentuser"),
-     *             @OA\Property(property="role", type="integer", example=3)
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Usuario no encontrado",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="error", type="string", example="User not found")
-     *         )
-     *     )
-     * )
-     */
+    #[OA\Get(
+        path: "/user",
+        description: "Returns the information of the currently authenticated user.",
+        summary: "Get authenticated user data",
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "User data retrieved successfully",
+                content: new OA\JsonContent(
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "id", type: "integer", example: 1),
+                        new OA\Property(property: "username", type: "string", example: "currentuser"),
+                        new OA\Property(property: "role", type: "integer", example: 3)
+                    ]
+                )
+            ),
+            new OA\Response(
+                response: 404,
+                description: "User not found",
+                content: new OA\JsonContent(
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "error", type: "string", example: "User not found")
+                    ]
+                )
+            )
+        ]
+    )]
     public function getUser(Request $request, Response $response): Response
     {
         $user = $request->getAttribute('user');

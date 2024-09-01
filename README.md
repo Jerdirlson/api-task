@@ -48,3 +48,11 @@ A light infrastructure is provided with a populated MySQL database with example 
 Beyond the requirements of this test we want to see what you can do, feel free to show us your real potential and, the
 most important part, have fun!
 
+
+# API Backend Coding Task
+http://0.0.0.0:8080/login
+
+{
+"username": "admin_user",
+"password": "2024"
+}

@@ -11,7 +11,7 @@ use Slim\Psr7\Response as SlimResponse;
 /**
  * @OA\Schema(
  *     schema="RoleMiddleware",
- *     description="Middleware para verificar el rol del usuario basado en un token JWT.",
+ *     description="Middleware to verify the user's role based on a JWT token.",
  *     type="object"
  * )
  */
@@ -21,17 +21,17 @@ class RoleMiddleware
      * @OA\Property(
      *     property="requiredRole",
      *     type="integer",
-     *     description="El rol requerido para acceder a la ruta protegida."
+     *     description="The required role to access the protected route."
      * )
      *
-     * @var int $requiredRole El rol requerido para la ruta.
+     * @var int $requiredRole The role required for the route.
      */
     private $requiredRole;
 
     /**
-     * Constructor para inicializar el middleware con el rol requerido.
+     * Constructor to initialize the middleware with the required role.
      *
-     * @param int $requiredRole El rol necesario para acceder a la ruta protegida.
+     * @param int $requiredRole The role needed to access the protected route.
      */
     public function __construct(int $requiredRole)
     {
@@ -41,25 +41,25 @@ class RoleMiddleware
     /**
      * @OA\Method(
      *     method="__invoke",
-     *     summary="Maneja la verificación del rol a través del token JWT",
-     *     description="Este método es invocado automáticamente por Slim para manejar la verificación del rol del usuario basado en el token JWT proporcionado en el encabezado de autorización.",
+     *     summary="Handles role verification using the JWT token",
+     *     description="This method is automatically invoked by Slim to handle the user's role verification based on the JWT token provided in the authorization header.",
      *     parameters={
      *         @OA\Parameter(
      *             name="Authorization",
      *             in="header",
      *             required=true,
-     *             description="Token JWT en el formato 'Bearer {token}'",
+     *             description="JWT token in the format 'Bearer {token}'",
      *             @OA\Schema(type="string")
      *         )
      *     },
      *     responses={
      *         @OA\Response(
      *             response="200",
-     *             description="Acceso permitido"
+     *             description="Access granted"
      *         ),
      *         @OA\Response(
      *             response="401",
-     *             description="No autorizado",
+     *             description="Unauthorized",
      *             @OA\JsonContent(
      *                 type="object",
      *                 @OA\Property(property="error", type="string", example="Authorization header not found")
@@ -67,7 +67,7 @@ class RoleMiddleware
      *         ),
      *         @OA\Response(
      *             response="401",
-     *             description="Token inválido o permisos insuficientes",
+     *             description="Invalid token or insufficient permissions",
      *             @OA\JsonContent(
      *                 type="object",
      *                 @OA\Property(property="error", type="string", example="Invalid token")
@@ -77,9 +77,9 @@ class RoleMiddleware
      *     throws="Exception"
      * )
      *
-     * @param Request $request La solicitud HTTP.
-     * @param RequestHandler $handler El manejador de la solicitud.
-     * @return Response La respuesta HTTP.
+     * @param Request $request The HTTP request.
+     * @param RequestHandler $handler The request handler.
+     * @return Response The HTTP response.
      */
     public function __invoke(Request $request, RequestHandler $handler): Response
     {
@@ -109,10 +109,10 @@ class RoleMiddleware
     }
 
     /**
-     * Genera una respuesta de no autorizado (401).
+     * Generates an unauthorized (401) response.
      *
-     * @param string $message El mensaje de error.
-     * @return Response La respuesta HTTP con un mensaje de error.
+     * @param string $message The error message.
+     * @return Response The HTTP response with an error message.
      */
     private function unauthorizedResponse(string $message = 'Unauthorized'): Response
     {

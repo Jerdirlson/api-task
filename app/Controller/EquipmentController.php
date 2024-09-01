@@ -5,6 +5,7 @@ use app\Model\Interfaces\EquipmentRepositoryInterface;
 use app\Utils\ErrorHandler;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
+use OpenApi\Attributes as OA;
 
 class EquipmentController
 {
@@ -15,25 +16,25 @@ class EquipmentController
         $this->repository = $repository;
     }
 
-    /**
-     * @OA\Get(
-     *     path="/equipment",
-     *     summary="Obtiene una lista de todo el equipo",
-     *     description="Retorna una lista con todos los equipos disponibles en la base de datos.",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Lista de equipos obtenida exitosamente",
-     *         @OA\JsonContent(
-     *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Equipment")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error al obtener los equipos"
-     *     )
-     * )
-     */
+    #[OA\Get(
+        path: "/equipment",
+        description: "Returns a list of all equipment available in the database.",
+        summary: "Get all equipment",
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Equipment list retrieved successfully",
+                content: new OA\JsonContent(
+                    type: "array",
+                    items: new OA\Items(type: "object", additionalProperties: true)
+                )
+            ),
+            new OA\Response(
+                response: 500,
+                description: "Failed to retrieve equipment"
+            )
+        ]
+    )]
     public function index(Request $request, Response $response): Response
     {
         try {
@@ -47,33 +48,35 @@ class EquipmentController
         }
     }
 
-    /**
-     * @OA\Get(
-     *     path="/equipment/{id}",
-     *     summary="Obtiene un equipo por ID",
-     *     description="Retorna los datos de un equipo específico basado en su ID.",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         description="ID del equipo",
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Equipo encontrado",
-     *         @OA\JsonContent(ref="#/components/schemas/Equipment")
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Equipo no encontrado"
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error al obtener el equipo"
-     *     )
-     * )
-     */
+    #[OA\Get(
+        path: "/equipment/{id}",
+        description: "Returns the details of specific equipment based on its ID.",
+        summary: "Get equipment by ID",
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                description: "Equipment ID",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(type: "integer")
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Equipment retrieved successfully",
+                content: new OA\JsonContent(type: "object", additionalProperties: true)
+            ),
+            new OA\Response(
+                response: 404,
+                description: "Equipment not found"
+            ),
+            new OA\Response(
+                response: 500,
+                description: "Failed to retrieve equipment"
+            )
+        ]
+    )]
     public function show(Request $request, Response $response, array $args): Response
     {
         try {
@@ -90,29 +93,31 @@ class EquipmentController
         }
     }
 
-    /**
-     * @OA\Post(
-     *     path="/equipment",
-     *     summary="Crea un nuevo equipo",
-     *     description="Permite crear un nuevo equipo en la base de datos.",
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/Equipment")
-     *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="Equipo creado exitosamente",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="Equipment created successfully")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error al crear el equipo"
-     *     )
-     * )
-     */
+    #[OA\Post(
+        path: "/equipment",
+        description: "Allows the creation of new equipment in the database.",
+        summary: "Create new equipment",
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(type: "object", additionalProperties: true)
+        ),
+        responses: [
+            new OA\Response(
+                response: 201,
+                description: "Equipment created successfully",
+                content: new OA\JsonContent(
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Equipment created successfully")
+                    ]
+                )
+            ),
+            new OA\Response(
+                response: 500,
+                description: "Failed to create equipment"
+            )
+        ]
+    )]
     public function store(Request $request, Response $response): Response
     {
         $data = $request->getParsedBody();
@@ -129,36 +134,40 @@ class EquipmentController
         }
     }
 
-    /**
-     * @OA\Put(
-     *     path="/equipment/{id}",
-     *     summary="Actualiza un equipo existente",
-     *     description="Permite actualizar los datos de un equipo existente.",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         description="ID del equipo",
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/Equipment")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Equipo actualizado exitosamente",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="Equipment updated successfully")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error al actualizar el equipo"
-     *     )
-     * )
-     */
+    #[OA\Put(
+        path: "/equipment/{id}",
+        description: "Allows updating the details of existing equipment.",
+        summary: "Update existing equipment",
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(type: "object", additionalProperties: true)
+        ),
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                in: "path",
+                required: true,
+                description: "Equipment ID",
+                schema: new OA\Schema(type: "integer")
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Equipment updated successfully",
+                content: new OA\JsonContent(
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Equipment updated successfully")
+                    ]
+                )
+            ),
+            new OA\Response(
+                response: 500,
+                description: "Failed to update equipment"
+            )
+        ]
+    )]
     public function update(Request $request, Response $response, array $args): Response
     {
         $data = $request->getParsedBody();
@@ -175,32 +184,36 @@ class EquipmentController
         }
     }
 
-    /**
-     * @OA\Delete(
-     *     path="/equipment/{id}",
-     *     summary="Elimina un equipo por ID",
-     *     description="Permite eliminar un equipo de la base de datos usando su ID.",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         description="ID del equipo",
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Equipo eliminado exitosamente",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="Equipment deleted successfully")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error al eliminar el equipo"
-     *     )
-     * )
-     */
+    #[OA\Delete(
+        path: "/equipment/{id}",
+        description: "Allows deleting equipment from the database using its ID.",
+        summary: "Delete equipment by ID",
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                description: "Equipment ID",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(type: "integer")
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Equipment deleted successfully",
+                content: new OA\JsonContent(
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Equipment deleted successfully")
+                    ]
+                )
+            ),
+            new OA\Response(
+                response: 500,
+                description: "Failed to delete equipment"
+            )
+        ]
+    )]
     public function destroy(Request $request, Response $response, array $args): Response
     {
         try {

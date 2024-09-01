@@ -40,9 +40,10 @@
       <path value="$PROJECT_DIR$/app/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/app/vendor/symfony/yaml" />
       <path value="$PROJECT_DIR$/app/vendor/zircote/swagger-php" />
+      <path value="$PROJECT_DIR$/app/vendor/swagger-api/swagger-ui" />
     </include_path>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
   </component>

@@ -208,6 +208,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'swagger-api/swagger-ui' => array(
+            'pretty_version' => 'v5.17.14',
+            'version' => '5.17.14.0',
+            'reference' => '74ed0adebfc9c8dd0de2bf8e81495b022a66c083',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../swagger-api/swagger-ui',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'symfony/deprecation-contracts' => array(
             'pretty_version' => 'v3.5.0',
             'version' => '3.5.0.0',

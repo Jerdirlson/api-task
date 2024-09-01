@@ -5,6 +5,7 @@ use app\Model\Interfaces\FactionRepositoryInterface;
 use app\Utils\ErrorHandler;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
+use OpenApi\Attributes as OA;
 
 class FactionController
 {
@@ -15,25 +16,25 @@ class FactionController
         $this->repository = $repository;
     }
 
-    /**
-     * @OA\Get(
-     *     path="/factions",
-     *     summary="Obtiene una lista de todas las facciones",
-     *     description="Retorna una lista con todas las facciones disponibles en la base de datos.",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Lista de facciones obtenida exitosamente",
-     *         @OA\JsonContent(
-     *             type="array",
-     *             @OA\Items(ref="#/components/schemas/Faction")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error al obtener las facciones"
-     *     )
-     * )
-     */
+    #[OA\Get(
+        path: "/factions",
+        description: "Returns a list of all factions available in the database.",
+        summary: "Get all factions",
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Factions list retrieved successfully",
+                content: new OA\JsonContent(
+                    type: "array",
+                    items: new OA\Items(type: "object", additionalProperties: true)
+                )
+            ),
+            new OA\Response(
+                response: 500,
+                description: "Failed to retrieve factions"
+            )
+        ]
+    )]
     public function index(Request $request, Response $response): Response
     {
         try {
@@ -47,33 +48,35 @@ class FactionController
         }
     }
 
-    /**
-     * @OA\Get(
-     *     path="/factions/{id}",
-     *     summary="Obtiene una facción por ID",
-     *     description="Retorna los datos de una facción específica basada en su ID.",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         description="ID de la facción",
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Facción encontrada",
-     *         @OA\JsonContent(ref="#/components/schemas/Faction")
-     *     ),
-     *     @OA\Response(
-     *         response=404,
-     *         description="Facción no encontrada"
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error al obtener la facción"
-     *     )
-     * )
-     */
+    #[OA\Get(
+        path: "/factions/{id}",
+        description: "Returns the details of a specific faction based on its ID.",
+        summary: "Get faction by ID",
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                description: "Faction ID",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(type: "integer")
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Faction retrieved successfully",
+                content: new OA\JsonContent(type: "object", additionalProperties: true)
+            ),
+            new OA\Response(
+                response: 404,
+                description: "Faction not found"
+            ),
+            new OA\Response(
+                response: 500,
+                description: "Failed to retrieve faction"
+            )
+        ]
+    )]
     public function show(Request $request, Response $response, array $args): Response
     {
         try {
@@ -90,29 +93,31 @@ class FactionController
         }
     }
 
-    /**
-     * @OA\Post(
-     *     path="/factions",
-     *     summary="Crea una nueva facción",
-     *     description="Permite crear una nueva facción en la base de datos.",
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/Faction")
-     *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="Facción creada exitosamente",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="Faction created successfully")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error al crear la facción"
-     *     )
-     * )
-     */
+    #[OA\Post(
+        path: "/factions",
+        description: "Allows the creation of a new faction in the database.",
+        summary: "Create new faction",
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(type: "object", additionalProperties: true)
+        ),
+        responses: [
+            new OA\Response(
+                response: 201,
+                description: "Faction created successfully",
+                content: new OA\JsonContent(
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Faction created successfully")
+                    ]
+                )
+            ),
+            new OA\Response(
+                response: 500,
+                description: "Failed to create faction"
+            )
+        ]
+    )]
     public function store(Request $request, Response $response): Response
     {
         $data = $request->getParsedBody();
@@ -129,36 +134,40 @@ class FactionController
         }
     }
 
-    /**
-     * @OA\Put(
-     *     path="/factions/{id}",
-     *     summary="Actualiza una facción existente",
-     *     description="Permite actualizar los datos de una facción existente.",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         description="ID de la facción",
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/Faction")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Facción actualizada exitosamente",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="Faction updated successfully")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error al actualizar la facción"
-     *     )
-     * )
-     */
+    #[OA\Put(
+        path: "/factions/{id}",
+        description: "Allows updating the details of an existing faction.",
+        summary: "Update existing faction",
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(type: "object", additionalProperties: true)
+        ),
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                in: "path",
+                required: true,
+                description: "Faction ID",
+                schema: new OA\Schema(type: "integer")
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Faction updated successfully",
+                content: new OA\JsonContent(
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Faction updated successfully")
+                    ]
+                )
+            ),
+            new OA\Response(
+                response: 500,
+                description: "Failed to update faction"
+            )
+        ]
+    )]
     public function update(Request $request, Response $response, array $args): Response
     {
         $data = $request->getParsedBody();
@@ -175,32 +184,36 @@ class FactionController
         }
     }
 
-    /**
-     * @OA\Delete(
-     *     path="/factions/{id}",
-     *     summary="Elimina una facción por ID",
-     *     description="Permite eliminar una facción de la base de datos usando su ID.",
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         description="ID de la facción",
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Facción eliminada exitosamente",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="message", type="string", example="Faction deleted successfully")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=500,
-     *         description="Error al eliminar la facción"
-     *     )
-     * )
-     */
+    #[OA\Delete(
+        path: "/factions/{id}",
+        description: "Allows deleting a faction from the database using its ID.",
+        summary: "Delete faction by ID",
+        parameters: [
+            new OA\Parameter(
+                name: "id",
+                description: "Faction ID",
+                in: "path",
+                required: true,
+                schema: new OA\Schema(type: "integer")
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Faction deleted successfully",
+                content: new OA\JsonContent(
+                    type: "object",
+                    properties: [
+                        new OA\Property(property: "message", type: "string", example: "Faction deleted successfully")
+                    ]
+                )
+            ),
+            new OA\Response(
+                response: 500,
+                description: "Failed to delete faction"
+            )
+        ]
+    )]
     public function destroy(Request $request, Response $response, array $args): Response
     {
         try {
