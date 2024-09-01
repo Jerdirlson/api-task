@@ -56,3 +56,7 @@ http://0.0.0.0:8080/login
 "username": "admin_user",
 "password": "2024"
 }
+
+Make test to run test
+
+Make generate-docs to generate documentation and see on http://0.0.0.0:8080/docs
