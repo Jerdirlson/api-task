@@ -62,3 +62,6 @@ composer-require-dev: ## Añade nuevas dependencias de desarrollo
 
 generate-docs: ## Genera la documentación con swagger-php
 	docker run --rm -v ${PWD}/app:/app -w /app $(IMAGE_NAME):$(IMAGE_TAG_DEV) php /app/Documentation/GenerateDocumentation.php
+
+test: ## Ejecuta las pruebas unitarias y de integración con PHPUnit
+	docker run --rm -v ${PWD}/app:/app -w /app $(IMAGE_NAME):$(IMAGE_TAG_DEV) ./vendor/bin/phpunit
